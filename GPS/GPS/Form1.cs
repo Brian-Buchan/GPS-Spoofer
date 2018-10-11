@@ -66,9 +66,13 @@ namespace GPS
         {
             cmb_Connected_Devices.Items.Clear();
             ReadOnlyCollection<string> udids = GetDevices();
-            foreach (string udid in udids)
+            if (udids != null)
             {
-                cmb_Connected_Devices.Items.Add(udid);
+                foreach (string udid in udids)
+                {
+                    cmb_Connected_Devices.Items.Add(udid);
+                }
+
             }
         }
 
@@ -85,7 +89,7 @@ namespace GPS
             if (ret == iDeviceError.NoDevice)
             {
                 // Not actually an error in our case
-                //return;
+                return null;
             }
 
             ret.ThrowOnError();
